@@ -1,14 +1,13 @@
 
 function telephoneCheck(str) {
   // Good luck!
-  var re = new RegExp(/\d+|^\(\d+\)|1+/, 'g');
-  console.log(re.test(str));
-  if (re.test(str)) {
-    return true;
-  }
-  return false;
+  var patt = /^1?(\s)?(\(\d{3}\)|\d{3})(-|\s)?\d{3}(-|\s)?\d{4}$/;
+
+  console.log(patt.test(str));
+
+  return patt.test(str);
 }
 
 
 
-telephoneCheck("555-555-5555");
+telephoneCheck("27576227382")
