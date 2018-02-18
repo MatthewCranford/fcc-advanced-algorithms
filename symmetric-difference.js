@@ -4,26 +4,38 @@ function sym(args) {
   
   // hold symetric difference
   var storedArr = [];
+  var tempArr;
   
     
   // loop through earch arg in args
   for (var arg = 0; arg< arguments.length; arg++) {
     console.log(arg,arguments[arg],storedArr);
+    tempArr = [];
     // for each number in arg
-    for (var num =0; num< arguments[arg].length;num++) {
+    for (var num = 0; num< arguments[arg].length;num++) {
       console.log(arguments[arg][num]);
-      // if number exists in stored arr
-      if (storedArr.includes(arguments[arg][num])) {
-        // splice it
-        storedArr.splice(storedArr.indexOf(arguments[arg][num]),1);
+      // avoid duplicates
+      if (tempArr.includes(arguments[arg][num])) {
+        continue;
       }
       
       // else 
       else {
-        // push it
-        storedArr.push(arguments[arg][num]);
+        // push to temp array
+        tempArr.push(arguments[arg][num]);
       }
         
+    }
+    // loop over temp array
+    for (var item = 0; item < tempArr.length; item++) {
+      if(storedArr.includes(tempArr[item])) {
+        // splice non symmetric difference
+        storedArr.splice(storedArr.indexOf(tempArr[item]),1);
+      }
+      else {
+        // push symmetric difference to stored array
+        storedArr.push(tempArr[item]);
+      }
     }
     
       
