@@ -3,15 +3,21 @@ function permAlone(str) {
   
   var strArr = str.split('');
   var tempArr = [];
+  var firstLetter;
   
-  console.log(strArr);
+  console.log("strArr:",strArr);
+  
   // for each letter in strArr
   for (var letter=0; letter<strArr.length; letter++) {
-    console.log(strArr[letter]);
-    tempArr.push(strArr[letter]);
+    console.log("for letter:",strArr[letter]);
+
+    for (var perm=letter+1; perm<strArr.length; perm++) {
+     console.log("perm:",strArr[perm]);
+    }
   }
+    
   
-  console.log(strArr); 
+  
   
   
   
