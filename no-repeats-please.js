@@ -1,28 +1,59 @@
 
 function permAlone(str) {
   
+  // each letter of string
   var strArr = str.split('');
-  var tempArr = [];
-  var firstLetter;
-  
   console.log("strArr:",strArr);
   
-  // for each letter in strArr
-  for (var letter=0; letter<strArr.length; letter++) {
-    console.log("for letter:",strArr[letter]);
+  // give each letter a value of 1
+  var countArr = strArr.map(function() {
+    return 1;
+  });
+  console.log("countArr: ",countArr);
+  
+  // hold each perm result
+  var resultArr = [];
 
-    for (var perm=letter+1; perm<strArr.length; perm++) {
-     console.log("perm:",strArr[perm]);
-    }
+  
+  // call findPerm function
+  findPerm(strArr, countArr, resultArr, 0);
+  // pass strArr, countArr, resultArr, level
+
+  console.log("results:", resultArr);
+
+}
+
+function findPerm(strArr, countArr, resultArr, level) {
+  
+  // if level === strArr.length
+  if (level === strArr.length) {
+    // return resultArr
+    console.log(resultArr);
+    return;
   }
-    
-  
-  
-  
-  
-  
-  
-  return str;
+  // for each letter in strArr
+  for (var i = 0; i < strArr.length; i++) {
+    // if letter !== 0 
+    if (countArr[i] !== 0) {
+
+      // add it resultArr
+      resultArr[level]=strArr[i];
+
+      // countArr --
+      countArr[i]--;
+
+      // level ++
+      level++;
+
+      // call next level of recursion
+      findPerm(strArr, countArr, resultArr, level);
+
+      // countArr ++
+      countArr[i]++;
+
+    }      
+  }
+      
 }
 
 permAlone('aab');
