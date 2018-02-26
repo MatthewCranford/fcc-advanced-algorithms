@@ -1,4 +1,3 @@
-var test = [];
 
 function permAlone(str) {
   
@@ -14,18 +13,18 @@ function permAlone(str) {
   
   // hold each perm result
   var resultArr = [];
-
+  var permArr = [];
   
   // call findPerm function
-  findPerm(strArr, countArr, resultArr, 0);
+  findPerm(strArr, countArr, resultArr, 0, permArr);
   // pass strArr, countArr, resultArr, level
   
-  console.log("results:", resultArr);
-  return test;
+  console.log("results:", permArr);
+  return findNoRepeatPerm(permArr);
 
 }
 
-function findPerm(strArr, countArr, resultArr, level) {
+function findPerm(strArr, countArr, resultArr, level, permArr) {
   
 
   // if level === strArr.length
@@ -34,7 +33,7 @@ function findPerm(strArr, countArr, resultArr, level) {
     
     resultArr = resultArr.join('').split(" ");
 //     console.log("resultArr:", resultArr);
-    test.push(resultArr);
+    permArr.push(resultArr);
     return;
   }
   // for each letter in strArr
@@ -52,13 +51,35 @@ function findPerm(strArr, countArr, resultArr, level) {
     countArr[i] -= 1;
    
     // call next level of recursion
-    findPerm(strArr, countArr, resultArr, level + 1);
+    findPerm(strArr, countArr, resultArr, level + 1, permArr);
 
     // countArr ++
-    countArr[i] += 1;
-      
+    countArr[i] += 1; 
   }
       
+}
+
+function findNoRepeatPerm(permArr) {
+  
+  // total = 0
+  var total = 0;
+  // reg = //
+  var reg = /\b(?:([a-z])(?!\1))+\b/;
+  
+  
+  // for each item in permArr
+  for (var perm = 0; perm < permArr.length; perm++) {
+    // if item passes regex
+    if (reg.test(permArr[perm])) {
+       // total += 1
+      total += 1;
+    }   
+  }  
+   
+  
+  // return total
+  return total;
+    
 }
 
 permAlone('aab');
