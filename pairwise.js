@@ -3,12 +3,14 @@ function pairwise(arr, arg) {
   
   var total = 0;
   var usedArr = [];
+  var accIndex = 0;
   
   console.log("arr", arr,
               "arg", arg);
 
   // for each index of arr
   arr.forEach(function(item) {
+    
     
     console.log("each item", item);
     
@@ -17,7 +19,8 @@ function pairwise(arr, arg) {
       
       
       
-      if (index > arr.indexOf(acc)) {
+      if (index > arr.indexOf(acc,accIndex)) {
+        
         console.log(
         "acc",acc,
         "val",val,
@@ -26,21 +29,22 @@ function pairwise(arr, arg) {
         
         if (acc + val === arg) {
 
-          if (!(usedArr.includes(arr.indexOf(acc)) || usedArr.includes(arr.indexOf(val,index)))) {
-            total += (arr.indexOf(acc) + arr.indexOf(val,index));
-            usedArr += arr.indexOf(acc);
-            usedArr += arr.indexOf(val,index);
+          if (!(usedArr.includes(arr.indexOf(acc,accIndex)) || usedArr.includes(arr.indexOf(val,index)))) {
+         
+            total += (accIndex + arr.indexOf(val,index));
+            usedArr.push(arr.indexOf(acc, accIndex));
+            usedArr.push(arr.indexOf(val,index));
+            
             console.log(
-              "acc+val =", acc + val,
-              "index of acc:", arr.indexOf(acc),
-              "index of val:", arr.indexOf(val,arr.indexOf(acc)+1),
-              "total", total
+              "acc index", arr.indexOf(acc,accIndex),
+              "val index", arr.indexOf(val,arr.indexOf(val,index)),
+              "total", total,
+              "usedArr", usedArr
             ); 
           }
           
-       
-
         }
+        
       }
       
       
@@ -49,6 +53,7 @@ function pairwise(arr, arg) {
                
  
     }, item);
+    accIndex += 1;
     
     
   });
@@ -61,5 +66,6 @@ function pairwise(arr, arg) {
   return total;
 }
 
-// pairwise([1, 1, 1], 2);
-pairwise([1,4,2,3,0,5], 7);
+// pairwise([0, 0, 0, 0, 1, 1], 1);
+pairwise([1, 1, 1], 2);
+// pairwise([1,4,2,3,0,5], 7);
